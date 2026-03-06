@@ -127,23 +127,30 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
 @keyframes glow{0%{box-shadow:0 0 0 0 rgba(13,122,107,.6)}50%{box-shadow:0 0 10px 4px rgba(13,122,107,.3)}100%{box-shadow:0 0 0 0 rgba(13,122,107,.6)}}
 .mk-acked{background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:10px 16px;color:#2e7d32;font-size:12px;font-weight:500;margin:0 16px}
 
-/* ─── MOCKUP: STEPPER ─── */
-.mk-stepper-wrap{padding:16px;background:#fff}
-.mk-stepper{display:flex;align-items:flex-start;position:relative;overflow:visible}
-.mk-stepper::before{content:'';position:absolute;top:15px;left:20px;right:20px;height:2px;background:var(--border);z-index:0}
-.mk-step{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;position:relative;z-index:1}
-.mk-step-circle{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid #cbd5e0;background:#f7f8fa;color:#a0aec0}
-.mk-step-circle.wt{background:#fff8e1;border-color:#f59e0b;color:#b45309}
-.mk-step-circle.un{background:#e8f0fe;border-color:#6b7ff7;color:#3b4ea6}
-.mk-step-circle.pnd{background:#ede9fe;border-color:#7c5cbf;color:#5b21b6}
-.mk-step-circle.dn{background:#e8f5e9;border-color:#4caf50;color:#2e7d32}
-.mk-step-circle.puls{animation:ring 1.6s ease-in-out infinite;border-color:#7c5cbf}
-@keyframes ring{0%{box-shadow:0 0 0 0 rgba(124,92,191,.5)}60%{box-shadow:0 0 0 5px rgba(124,92,191,0)}100%{box-shadow:0 0 0 0 rgba(124,92,191,0)}}
-.mk-step-label{font-size:8px;text-align:center;color:var(--muted);max-width:52px;line-height:1.3}
-.mk-step-badge{font-size:8px;background:var(--navy);color:#fff;padding:1px 5px;border-radius:8px;margin-top:2px;display:inline-block}
-.mk-step-badge.y{background:#f59e0b}
-.mk-step-badge.p{background:#7c5cbf}
-.mk-step-badge.g{background:#4caf50}
+/* ─── MOCKUP: STEPPER (ตรงตามระบบจริง) ─── */
+.mk-stepper-wrap{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px 24px 16px}
+.mk-stepper{display:flex;align-items:flex-start;position:relative}
+.mk-stepper::before{content:'';position:absolute;top:21px;left:28px;right:28px;height:2px;background:var(--border);z-index:0}
+.mk-step{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;position:relative;z-index:1;cursor:pointer}
+.mk-step-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;border:2px solid #cbd5e0;background:#f7f8fa;position:relative;z-index:1;color:#a0aec0;flex-shrink:0}
+/* step states matching real system */
+.mk-step.waiting .mk-step-circle{background:#fff8e1;border-color:#f59e0b;color:#b45309}
+.mk-step.waiting .mk-step-label{color:#b45309}
+.mk-step.unacked .mk-step-circle{background:#e8f0fe;border-color:#3b4ea6;color:#3b4ea6}
+.mk-step.unacked .mk-step-label{color:#3b4ea6}
+.mk-step.pend .mk-step-circle{background:#ede9fe;border-color:#7c3aed;color:#5b21b6}
+.mk-step.pend .mk-step-label{color:#5b21b6}
+.mk-step.done .mk-step-circle{background:#e8f5e9;border-color:#66bb6a;color:#2e7d32}
+.mk-step.done .mk-step-label{color:#2e7d32}
+.mk-step.active .mk-step-circle{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 0 0 4px rgba(26,37,53,.15)}
+.mk-step.active .mk-step-label{color:var(--navy);font-weight:700}
+.mk-step.pulse-s .mk-step-circle{animation:stepPulse 1.8s ease-in-out infinite;border-color:#7c3aed;background:#ede9fe;color:#5b21b6}
+@keyframes stepPulse{0%{box-shadow:0 0 0 0 rgba(124,58,237,.5)}60%{box-shadow:0 0 0 7px rgba(124,58,237,0)}100%{box-shadow:0 0 0 0 rgba(124,58,237,0)}}
+/* RED BADGE — ตรงตามโค้ดจริง #e53e3e */
+.mk-step-badge{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 4px;background:#e53e3e;color:#fff;border-radius:9px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:2;border:2px solid #fff;line-height:1}
+.mk-step-label{font-size:9px;text-align:center;color:var(--muted);line-height:1.3;max-width:52px}
+.mk-step-count{font-size:15px;font-weight:700;color:inherit;margin-top:1px}
+.mk-step-count-label{font-size:9px;opacity:.8}
 
 /* ─── MOCKUP: TABLE ─── */
 .mk-table-head{background:#f8f9fb;padding:8px 16px;display:flex;gap:8px;font-size:9px;font-weight:700;color:var(--muted);border-bottom:1px solid var(--border)}
@@ -211,7 +218,7 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
       </button>
       <button class="role-btn" onclick="showSection('mgr',this)">
         <span class="rb-icon">✅</span>
-        <div class="rb-title">ผู้จัดการฝ่าย / ผช.กรรมการฯ</div>
+        <div class="rb-title">ผู้จัดการฝ่าย / ผู้ช่วยกรรมการฯ</div>
         <div class="rb-sub">Approve คะแนน</div>
       </button>
       <button class="role-btn" onclick="showSection('md',this)">
@@ -225,9 +232,6 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
 
 <div class="content">
 
-<!-- ═══════════════════════════════════════════
-     EMPLOYEE
-═══════════════════════════════════════════ -->
 <div class="section" id="sec-emp">
   <button class="back-btn" onclick="goBack()">← เปลี่ยนบทบาท</button>
   <div class="role-header">
@@ -371,12 +375,61 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
     </div>
 
   </div>
+
+  <!-- PASSWORD CHANGE -->
+  <div style="background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px">
+    <div style="background:linear-gradient(135deg,#1a2535,#2d3e55);padding:14px 18px;display:flex;align-items:center;gap:12px">
+      <div style="width:36px;height:36px;background:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🔐</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#fff">การเปลี่ยนรหัสผ่าน</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:2px">ทำครั้งเดียวตอนเข้าใช้งานครั้งแรก แล้วใช้รหัสนั้นต่อไปได้เลย</div>
+      </div>
+    </div>
+    <div style="padding:16px 18px">
+      <div style="background:#f0faf8;border:1px solid #b2dfdb;border-radius:8px;padding:10px 14px;margin-bottom:14px;display:flex;gap:10px;align-items:flex-start">
+        <span style="font-size:16px;flex-shrink:0">🛡️</span>
+        <div style="font-size:12px;color:#004d40;line-height:1.6">รหัสเริ่มต้นคือ <strong>เลขบัตรประชาชน 13 หลัก</strong> ของท่าน เมื่อเข้าสู่ระบบครั้งแรก จะมี popup ให้ตั้งรหัสใหม่ทันที</div>
+      </div>
+      <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:10px 14px;margin-bottom:14px;display:flex;gap:10px;align-items:flex-start">
+        <span style="font-size:15px;flex-shrink:0">⚠️</span>
+        <div style="font-size:12px;color:#7a5c00;line-height:1.6"><strong>หากลืมรหัสผ่าน</strong> กรุณาติดต่อแผนกทรัพยากรบุคคลเพื่อรีเซ็ตรหัส ไม่สามารถรีเซ็ตเองในระบบได้</div>
+      </div>
+      <!-- MOCKUP password popup -->
+      <div style="background:#f5f7fa;border:1px solid var(--border);border-radius:8px;overflow:hidden">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);padding:10px 14px 8px;display:flex;align-items:center;gap:6px">ตัวอย่าง popup ที่จะขึ้นเมื่อเข้าครั้งแรก<span style="flex:1;height:1px;background:var(--border);display:block"></span></div>
+        <!-- Dimmed backdrop simulation -->
+        <div style="background:rgba(15,42,74,0.18);padding:16px 12px">
+          <!-- Modal card -->
+          <div style="background:#fff;border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.18);overflow:hidden;max-width:320px;margin:0 auto">
+            <!-- Orange lock header -->
+            <div style="background:linear-gradient(135deg,#ff6f00,#ffa726);padding:20px 20px 16px;text-align:center">
+              <div style="width:48px;height:48px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 10px">🔒</div>
+              <div style="font-size:15px;font-weight:700;color:#fff">ตั้งรหัสผ่านใหม่</div>
+            </div>
+            <div style="padding:16px">
+              <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px">เนื่องจากเป็นการเข้าสู่ระบบครั้งแรก กรุณาตั้งรหัสผ่านใหม่ของคุณ</div>
+              <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:7px 10px;margin-bottom:12px;font-size:10px;color:#7a5c00">
+                ⚠️ รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร และไม่ควรเป็นเลขบัตรประชาชน
+              </div>
+              <div style="margin-bottom:8px">
+                <div style="font-size:10px;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px">รหัสผ่านใหม่</div>
+                <div style="height:32px;background:#f0faf8;border:1.5px solid var(--teal);border-radius:7px;display:flex;align-items:center;padding:0 10px;font-size:12px;color:#aaa;letter-spacing:4px">••••••••</div>
+              </div>
+              <div style="margin-bottom:14px">
+                <div style="font-size:10px;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px">ยืนยันรหัสผ่าน</div>
+                <div style="height:32px;background:#f0faf8;border:1.5px solid var(--teal);border-radius:7px;display:flex;align-items:center;padding:0 10px;font-size:12px;color:#aaa;letter-spacing:4px">••••••••</div>
+              </div>
+              <button style="width:100%;height:36px;background:linear-gradient(135deg,#ff6f00,#ffa726);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer">บันทึกรหัสผ่าน</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="cta"><p>พร้อมเข้าใช้งานแล้ว</p><a href="[LINK]" target="_blank">เข้าสู่ระบบ →</a></div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     SUPERVISOR
-═══════════════════════════════════════════ -->
 <div class="section" id="sec-sup">
   <button class="back-btn" onclick="goBack()">← เปลี่ยนบทบาท</button>
   <div class="role-header">
@@ -396,7 +449,7 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
         </div>
       </div>
       <div class="mockup-wrap">
-        <div class="mockup-label">ตัวอย่าง Stepper</div>
+        <div class="mockup-label">ตัวอย่าง Stepper — หัวหน้าแผนกไม่มีสิทธิ์ Approve จึงไม่มีวงกลมแดง</div>
         <div class="mockup-frame">
           <div class="mk-nav">
             <div class="mk-nav-brand"><div class="mk-nav-logo">📊</div>ระบบประเมิน KPI</div>
@@ -408,35 +461,33 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
           </div>
           <div class="mk-stepper-wrap">
             <div class="mk-stepper">
-              <div class="mk-step">
-                <div class="mk-step-circle wt">⏳</div>
-                <div class="mk-step-label">รอ<br>ประเมิน</div>
-                <span class="mk-step-badge y">8</span>
+              <div class="mk-step waiting">
+                <div class="mk-step-circle">
+                  <span class="mk-step-badge">8</span>⏳
+                </div>
+                <div class="mk-step-label">รอผลประเมิน<div class="mk-step-count">8</div><div class="mk-step-count-label">ราย</div></div>
               </div>
-              <div class="mk-step">
-                <div class="mk-step-circle un">🙋</div>
-                <div class="mk-step-label">รอ<br>รับทราบ</div>
-                <span class="mk-step-badge" style="background:#6b7ff7">3</span>
+              <div class="mk-step unacked">
+                <div class="mk-step-circle">
+                  <span class="mk-step-badge">3</span>🙋
+                </div>
+                <div class="mk-step-label">รอพนักงานรับทราบ<div class="mk-step-count">3</div><div class="mk-step-count-label">ราย</div></div>
               </div>
-              <div class="mk-step">
-                <div class="mk-step-circle pnd puls">📋</div>
-                <div class="mk-step-label">รอ<br>Approve 1</div>
-                <span class="mk-step-badge p">2</span>
+              <div class="mk-step pend">
+                <div class="mk-step-circle">📋</div>
+                <div class="mk-step-label">รอ Approve จากผู้จัดการฝ่าย<div class="mk-step-count">2</div><div class="mk-step-count-label">ราย</div></div>
               </div>
-              <div class="mk-step">
-                <div class="mk-step-circle pnd">📋</div>
-                <div class="mk-step-label">รอ<br>Approve 2</div>
-                <span class="mk-step-badge p">0</span>
+              <div class="mk-step pend">
+                <div class="mk-step-circle">📋</div>
+                <div class="mk-step-label">รอ Approve จากผู้ช่วยกรรมการ<div class="mk-step-count">0</div><div class="mk-step-count-label">ราย</div></div>
               </div>
-              <div class="mk-step">
-                <div class="mk-step-circle pnd">📋</div>
-                <div class="mk-step-label">รอ<br>MD</div>
-                <span class="mk-step-badge p">1</span>
+              <div class="mk-step pend">
+                <div class="mk-step-circle">📋</div>
+                <div class="mk-step-label">รอ Approve จากกรรมการผู้จัดการ<div class="mk-step-count">1</div><div class="mk-step-count-label">ราย</div></div>
               </div>
-              <div class="mk-step">
-                <div class="mk-step-circle dn">✓</div>
-                <div class="mk-step-label">เสร็จ<br>สิ้น</div>
-                <span class="mk-step-badge g">12</span>
+              <div class="mk-step done">
+                <div class="mk-step-circle">✓</div>
+                <div class="mk-step-label">เสร็จสิ้น<div class="mk-step-count">12</div><div class="mk-step-count-label">ราย</div></div>
               </div>
             </div>
           </div>
@@ -457,32 +508,32 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
         <div class="mockup-label">ตัวอย่างตารางรายชื่อ</div>
         <div class="mockup-frame">
           <div class="mk-table-head">
-            <span style="flex:2">ชื่อ-นามสกุล</span>
-            <span style="flex:1">ทีม</span>
-            <span style="flex:1">สถานะ</span>
-            <span style="flex:1">คะแนน</span>
-            <span style="flex:1"></span>
+            <span style="flex:2.5">ชื่อ-นามสกุล</span>
+            <span style="flex:0.7">ทีม</span>
+            <span style="flex:1.8">สถานะ</span>
+            <span style="flex:0.8">คะแนน</span>
+            <span style="flex:0.8"></span>
           </div>
           <div class="mk-table-row">
-            <span style="flex:2;font-size:11px;font-weight:600">สมหญิง รักงาน</span>
-            <span style="flex:1;font-size:10px;color:var(--muted)">ทีม A</span>
-            <span style="flex:1"><span class="mk-chip pend">⏳ รอประเมิน</span></span>
-            <span style="flex:1;color:var(--muted);font-size:11px">-</span>
-            <span style="flex:1"><button class="mk-btn-sm mk-btn-eval">📝 ประเมิน</button></span>
+            <span style="flex:2.5;font-size:11px;font-weight:600">สมหญิง รักงาน</span>
+            <span style="flex:0.7;font-size:10px;color:var(--muted)">ทีม A</span>
+            <span style="flex:1.8"><span class="mk-chip pend">⏳ รอประเมิน</span></span>
+            <span style="flex:0.8;color:var(--muted);font-size:11px">-</span>
+            <span style="flex:0.8"><button class="mk-btn-sm mk-btn-eval">📝 ประเมิน</button></span>
           </div>
           <div class="mk-table-row">
-            <span style="flex:2;font-size:11px;font-weight:600">วิชัย มานะ</span>
-            <span style="flex:1;font-size:10px;color:var(--muted)">ทีม A</span>
-            <span style="flex:1"><span class="mk-chip sub">🙋 รอรับทราบ</span></span>
-            <span style="flex:1;font-size:11px;font-weight:700;color:var(--navy)">82.50</span>
-            <span style="flex:1"><button class="mk-btn-sm mk-btn-view">✏️ แก้ไข</button></span>
+            <span style="flex:2.5;font-size:11px;font-weight:600">วิชัย มานะ</span>
+            <span style="flex:0.7;font-size:10px;color:var(--muted)">ทีม A</span>
+            <span style="flex:1.8"><span class="mk-chip sub">🙋 รอรับทราบ</span></span>
+            <span style="flex:0.8;font-size:11px;font-weight:700;color:var(--navy)">82.50</span>
+            <span style="flex:0.8"><button class="mk-btn-sm mk-btn-view">✏️ แก้ไข</button></span>
           </div>
           <div class="mk-table-row">
-            <span style="flex:2;font-size:11px;font-weight:600">นารี สุขใจ</span>
-            <span style="flex:1;font-size:10px;color:var(--muted)">ทีม B</span>
-            <span style="flex:1"><span class="mk-chip app1">📋 รอ Approve ขั้น 1</span></span>
-            <span style="flex:1;font-size:11px;font-weight:700;color:var(--navy)">78.30</span>
-            <span style="flex:1"><button class="mk-btn-sm mk-btn-view">👁 ดูผล</button></span>
+            <span style="flex:2.5;font-size:11px;font-weight:600">นารี สุขใจ</span>
+            <span style="flex:0.7;font-size:10px;color:var(--muted)">ทีม B</span>
+            <span style="flex:1.8"><span class="mk-chip app1">📋 รอ Approve ขั้น 1</span></span>
+            <span style="flex:0.8;font-size:11px;font-weight:700;color:var(--navy)">78.30</span>
+            <span style="flex:0.8"><button class="mk-btn-sm mk-btn-view">👁 ดูผล</button></span>
           </div>
         </div>
       </div>
@@ -533,50 +584,80 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
   <div class="cta"><p>พร้อมเข้าใช้งานแล้ว</p><a href="[LINK]" target="_blank">เข้าสู่ระบบ →</a></div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     MANAGER / ASSISTANT
-═══════════════════════════════════════════ -->
 <div class="section" id="sec-mgr">
   <button class="back-btn" onclick="goBack()">← เปลี่ยนบทบาท</button>
   <div class="role-header">
     <div class="rh-icon">✅</div>
-    <div><h3>ผู้จัดการฝ่าย / ผช.กรรมการฯ</h3><p>Approve คะแนน — เปรียบเสมือนการเซ็นรับรองเอกสาร</p></div>
+    <div><h3>ผู้จัดการฝ่าย / ผู้ช่วยกรรมการผู้จัดการ</h3><p>มี 2 หน้าที่หลักในระบบนี้ — ประเมินลูกทีม และ Approve คะแนนที่หัวหน้าแผนกประเมิน</p></div>
+  </div>
+
+  <!-- TWO-TASK BANNER -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px">
+    <div style="background:#e8f0fe;border:1.5px solid #c7d7fd;border-radius:12px;padding:14px 16px">
+      <div style="font-size:18px;margin-bottom:6px">✏️</div>
+      <div style="font-size:13px;font-weight:700;color:#1e3a8a;margin-bottom:3px">หน้าที่ที่ 1</div>
+      <div style="font-size:12px;color:#3b4ea6">ประเมินผู้ใต้บังคับบัญชาโดยตรงของท่าน</div>
+    </div>
+    <div style="background:#ede9fe;border:1.5px solid #c4b5fd;border-radius:12px;padding:14px 16px">
+      <div style="font-size:18px;margin-bottom:6px">🖊️</div>
+      <div style="font-size:13px;font-weight:700;color:#4c1d95;margin-bottom:3px">หน้าที่ที่ 2</div>
+      <div style="font-size:12px;color:#5b21b6">Approve คะแนนที่หัวหน้าแผนกประเมิน</div>
+    </div>
+  </div>
+
+  <!-- PART A: EVALUATE -->
+  <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--blue);margin-bottom:10px;display:flex;align-items:center;gap:8px">
+    <span style="background:var(--blue);color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">A</span>
+    ประเมินผู้ใต้บังคับบัญชา
   </div>
 
   <div class="steps">
-
     <div class="step-card">
       <div class="step-top">
-        <div class="step-num">1</div>
+        <div class="step-num" style="background:var(--blue)">1</div>
         <div class="step-body">
-          <h4>กด Stepper ขั้น "รอ Approve"</h4>
-          <p>ดู Badge จำนวนคนที่รอท่าน Approve — <strong>กด Approve ได้เฉพาะรายที่พนักงานกดรับทราบแล้วเท่านั้น</strong></p>
-          <div class="tip">💡 ถ้าเห็น ⚠️ "รอพนักงานรับทราบก่อน" — ยังกด Approve ไม่ได้</div>
+          <h4>หน้า Evaluate — ดู Stepper</h4>
+          <p>Stepper แสดง 6 ขั้น — วงกลมสีแดงจะปรากฏที่ขั้น <strong>"รอ Approve จากผู้จัดการฝ่าย"</strong> ซึ่งคือขั้นที่ท่านมีสิทธิ์ Approve</p>
         </div>
       </div>
       <div class="mockup-wrap">
-        <div class="mockup-label">ตัวอย่างตาราง — รายที่รอ Approve</div>
+        <div class="mockup-label">ตัวอย่าง Stepper — วงกลมแดงที่ขั้น 3 คือรอท่าน Approve</div>
         <div class="mockup-frame">
-          <div class="mk-table-head">
-            <span style="flex:2">ชื่อ-นามสกุล</span>
-            <span style="flex:1">แผนก</span>
-            <span style="flex:1">สถานะ</span>
-            <span style="flex:1">คะแนน</span>
-            <span style="flex:1"></span>
+          <div class="mk-nav">
+            <div class="mk-nav-brand"><div class="mk-nav-logo">📊</div>ระบบประเมิน KPI</div>
+            <div class="mk-nav-right">
+              <div class="mk-nav-avatar">ผ</div>
+              <span class="mk-nav-name">ผกา จัดการ</span>
+              <button class="mk-nav-logout">ออกจากระบบ</button>
+            </div>
           </div>
-          <div class="mk-table-row">
-            <span style="flex:2;font-size:11px;font-weight:600">สมหญิง รักงาน</span>
-            <span style="flex:1;font-size:10px;color:var(--muted)">บัญชี</span>
-            <span style="flex:1"><span class="mk-chip app1">📋 รอ Approve ขั้น 1</span></span>
-            <span style="flex:1;font-size:11px;font-weight:700;color:var(--navy)">85.50</span>
-            <span style="flex:1"><button class="mk-btn-sm mk-btn-view">👁 ดูผล</button></span>
-          </div>
-          <div class="mk-table-row">
-            <span style="flex:2;font-size:11px;font-weight:600">วิชัย มานะ</span>
-            <span style="flex:1;font-size:10px;color:var(--muted)">บัญชี</span>
-            <span style="flex:1"><span class="mk-chip app1">📋 รอ Approve ขั้น 1</span></span>
-            <span style="flex:1;font-size:11px;font-weight:700;color:var(--navy)">79.20</span>
-            <span style="flex:1"><button class="mk-btn-sm mk-btn-view">👁 ดูผล</button></span>
+          <div class="mk-stepper-wrap">
+            <div class="mk-stepper">
+              <div class="mk-step waiting">
+                <div class="mk-step-circle">⏳</div>
+                <div class="mk-step-label">รอผลประเมิน<div class="mk-step-count">3</div><div class="mk-step-count-label">ราย</div></div>
+              </div>
+              <div class="mk-step unacked">
+                <div class="mk-step-circle">🙋</div>
+                <div class="mk-step-label">รอพนักงานรับทราบ<div class="mk-step-count">1</div><div class="mk-step-count-label">ราย</div></div>
+              </div>
+              <div class="mk-step pend pulse-s">
+                <div class="mk-step-circle"><span class="mk-step-badge">5</span>📋</div>
+                <div class="mk-step-label">รอ Approve จากผู้จัดการฝ่าย<div class="mk-step-count">5</div><div class="mk-step-count-label">ราย</div></div>
+              </div>
+              <div class="mk-step pend">
+                <div class="mk-step-circle">📋</div>
+                <div class="mk-step-label">รอ Approve จากผู้ช่วยกรรมการ<div class="mk-step-count">0</div><div class="mk-step-count-label">ราย</div></div>
+              </div>
+              <div class="mk-step pend">
+                <div class="mk-step-circle">📋</div>
+                <div class="mk-step-label">รอ Approve จากกรรมการผู้จัดการ<div class="mk-step-count">2</div><div class="mk-step-count-label">ราย</div></div>
+              </div>
+              <div class="mk-step done">
+                <div class="mk-step-circle">✓</div>
+                <div class="mk-step-label">เสร็จสิ้น<div class="mk-step-count">8</div><div class="mk-step-count-label">ราย</div></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -584,14 +665,92 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
 
     <div class="step-card">
       <div class="step-top">
-        <div class="step-num">2</div>
+        <div class="step-num" style="background:var(--blue)">2</div>
         <div class="step-body">
-          <h4>ตรวจสอบคะแนนและกด Approve</h4>
-          <p>กด <strong>"👁 ดูผล"</strong> เพื่อเปิดดูรายละเอียด ตรวจสอบคะแนนรวม แล้วกดปุ่ม <strong>"✓ Approve"</strong></p>
+          <h4>กดที่ "📋 รายชื่อผู้ใต้บังคับบัญชาที่ต้องดำเนินการ"</h4>
+          <p>ระบบจะแสดงรายชื่อเฉพาะคนที่อยู่ใต้บังคับบัญชาโดยตรงของท่าน พร้อมตัวเลขบอกจำนวนที่รอดำเนินการ</p>
+          <div class="tip">💡 ตัวเลขในวงกลมคือจำนวนพนักงานที่ยังรอการประเมินจากท่าน</div>
         </div>
       </div>
       <div class="mockup-wrap">
-        <div class="mockup-label">ตัวอย่างปุ่ม Approve ในหน้ารายละเอียด</div>
+        <div class="mockup-label">ตัวอย่างปุ่มรายชื่อผู้ใต้บังคับบัญชา</div>
+        <div class="mockup-frame">
+          <div style="padding:16px;text-align:center">
+            <button style="display:inline-flex;align-items:center;gap:10px;background:var(--teal);color:#fff;border:none;padding:11px 24px;border-radius:8px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer">
+              📋 รายชื่อผู้ใต้บังคับบัญชาที่ต้องดำเนินการ
+              <span style="background:rgba(255,255,255,0.25);color:#fff;min-width:22px;height:22px;padding:0 5px;border-radius:11px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;line-height:1">4</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num" style="background:var(--blue)">2</div>
+        <div class="step-body">
+          <h4>กรอกคะแนนและบันทึก</h4>
+          <p>กด <strong>"📝 ประเมิน"</strong> หน้าชื่อพนักงาน กรอกคะแนนแต่ละข้อ แล้วกด <strong>"💾 บันทึกคะแนน"</strong> — เหมือนกับขั้นตอนของหัวหน้าแผนกทุกประการ</p>
+          <div class="tip">💡 ข้อที่มี badge HR = HR กรอกให้ ไม่ต้องกรอกเอง</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART B: APPROVE -->
+  <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#5b21b6;margin:18px 0 10px;display:flex;align-items:center;gap:8px">
+    <span style="background:#5b21b6;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">B</span>
+    Approve คะแนนที่หัวหน้าแผนกประเมิน
+  </div>
+
+  <div class="steps">
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num" style="background:#5b21b6">1</div>
+        <div class="step-body">
+          <h4>กด Stepper ขั้น "รอ Approve"</h4>
+          <p>Badge สีม่วงแสดงจำนวนคนที่รอท่าน — <strong>กด Approve ได้เฉพาะรายที่พนักงานกดรับทราบแล้วเท่านั้น</strong></p>
+          <div class="tip">💡 ถ้าเห็น ⚠️ "รอพนักงานรับทราบก่อน" — ยังกด Approve ไม่ได้</div>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-label">ตัวอย่างตาราง — รายที่รอ Approve</div>
+        <div class="mockup-frame">
+          <div class="mk-table-head">
+            <span style="flex:2.5">ชื่อ-นามสกุล</span>
+            <span style="flex:0.7">แผนก</span>
+            <span style="flex:1.8">สถานะ</span>
+            <span style="flex:0.8">คะแนน</span>
+            <span style="flex:0.8"></span>
+          </div>
+          <div class="mk-table-row">
+            <span style="flex:2.5;font-size:11px;font-weight:600">สมหญิง รักงาน</span>
+            <span style="flex:0.7;font-size:10px;color:var(--muted)">บัญชี</span>
+            <span style="flex:1.8"><span class="mk-chip app1">📋 รอ Approve ขั้น 1</span></span>
+            <span style="flex:0.8;font-size:11px;font-weight:700;color:var(--navy)">85.50</span>
+            <span style="flex:0.8"><button class="mk-btn-sm mk-btn-view">👁 ดูผล</button></span>
+          </div>
+          <div class="mk-table-row">
+            <span style="flex:2.5;font-size:11px;font-weight:600">วิชัย มานะ</span>
+            <span style="flex:0.7;font-size:10px;color:var(--muted)">บัญชี</span>
+            <span style="flex:1.8"><span class="mk-chip app1">📋 รอ Approve ขั้น 1</span></span>
+            <span style="flex:0.8;font-size:11px;font-weight:700;color:var(--navy)">79.20</span>
+            <span style="flex:0.8"><button class="mk-btn-sm mk-btn-view">👁 ดูผล</button></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num" style="background:#5b21b6">2</div>
+        <div class="step-body">
+          <h4>ตรวจสอบและกด Approve</h4>
+          <p>กด <strong>"👁 ดูผล"</strong> ดูรายละเอียดคะแนน แล้วกดปุ่ม <strong>"✓ Approve"</strong> ที่ด้านล่าง การกด Approve เปรียบเสมือนการเซ็นรับรองเอกสาร</p>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-label">ตัวอย่างปุ่ม Approve</div>
         <div class="mockup-frame">
           <div style="padding:12px 16px;border-bottom:1px solid var(--border)">
             <div style="font-size:13px;font-weight:700;color:var(--navy)">สมหญิง รักงาน</div>
@@ -604,54 +763,85 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
         </div>
       </div>
     </div>
-
   </div>
+
   <div class="cta"><p>พร้อมเข้าใช้งานแล้ว</p><a href="[LINK]" target="_blank">เข้าสู่ระบบ →</a></div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     MD
-═══════════════════════════════════════════ -->
 <div class="section" id="sec-md">
   <button class="back-btn" onclick="goBack()">← เปลี่ยนบทบาท</button>
   <div class="role-header">
     <div class="rh-icon">🏢</div>
-    <div><h3>กรรมการผู้จัดการ (MD)</h3><p>Approve ขั้นสุดท้าย — เมื่อท่าน Approve กระบวนการเสร็จสิ้น</p></div>
+    <div><h3>กรรมการผู้จัดการ</h3><p>มี 2 หน้าที่หลักในระบบนี้ — ประเมินลูกทีม และ Approve ขั้นสุดท้ายให้ทุก role</p></div>
+  </div>
+
+  <!-- TWO-TASK BANNER -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px">
+    <div style="background:#e8f0fe;border:1.5px solid #c7d7fd;border-radius:12px;padding:14px 16px">
+      <div style="font-size:18px;margin-bottom:6px">✏️</div>
+      <div style="font-size:13px;font-weight:700;color:#1e3a8a;margin-bottom:3px">หน้าที่ที่ 1</div>
+      <div style="font-size:12px;color:#3b4ea6">ประเมินผู้ใต้บังคับบัญชาโดยตรงของท่าน</div>
+    </div>
+    <div style="background:#e8f5e9;border:1.5px solid #a5d6a7;border-radius:12px;padding:14px 16px">
+      <div style="font-size:18px;margin-bottom:6px">🖊️</div>
+      <div style="font-size:13px;font-weight:700;color:#1b5e20;margin-bottom:3px">หน้าที่ที่ 2</div>
+      <div style="font-size:12px;color:#2e7d32">Approve ขั้นสุดท้าย — ทุก role มาจบที่ท่าน</div>
+    </div>
+  </div>
+
+  <!-- PART A: EVALUATE -->
+  <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--blue);margin-bottom:10px;display:flex;align-items:center;gap:8px">
+    <span style="background:var(--blue);color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">A</span>
+    ประเมินผู้ใต้บังคับบัญชา
   </div>
 
   <div class="steps">
-
     <div class="step-card">
       <div class="step-top">
-        <div class="step-num">1</div>
+        <div class="step-num" style="background:var(--blue)">1</div>
         <div class="step-body">
-          <h4>กด Stepper ขั้นสุดท้าย "รอ MD"</h4>
-          <p>ทุก role รวมถึงหัวหน้าแผนก ผู้จัดการ และผู้ช่วยกรรมการ จะมาจบที่ท่าน Badge แสดงจำนวนที่รอ</p>
+          <h4>หน้า Evaluate — ดู Stepper</h4>
+          <p>Stepper แสดง 6 ขั้น — วงกลมสีแดงจะปรากฏที่ขั้น <strong>"รอ Approve จากกรรมการผู้จัดการ"</strong> ซึ่งเป็นขั้นสุดท้ายที่ท่านมีสิทธิ์ Approve</p>
         </div>
       </div>
       <div class="mockup-wrap">
-        <div class="mockup-label">ตัวอย่างตาราง — รายที่รอ MD Approve</div>
+        <div class="mockup-label">ตัวอย่าง Stepper — วงกลมแดงที่ขั้น 5 คือรอท่าน Approve</div>
         <div class="mockup-frame">
-          <div class="mk-table-head">
-            <span style="flex:2">ชื่อ-นามสกุล</span>
-            <span style="flex:1">ฝ่าย</span>
-            <span style="flex:1">สถานะ</span>
-            <span style="flex:1">คะแนน</span>
-            <span style="flex:1"></span>
+          <div class="mk-nav">
+            <div class="mk-nav-brand"><div class="mk-nav-logo">📊</div>ระบบประเมิน KPI</div>
+            <div class="mk-nav-right">
+              <div class="mk-nav-avatar">ก</div>
+              <span class="mk-nav-name">กอบกาญจน์ บริหาร</span>
+              <button class="mk-nav-logout">ออกจากระบบ</button>
+            </div>
           </div>
-          <div class="mk-table-row">
-            <span style="flex:2;font-size:11px;font-weight:600">สมหญิง รักงาน</span>
-            <span style="flex:1;font-size:10px;color:var(--muted)">การเงิน</span>
-            <span style="flex:1"><span class="mk-chip app1">📋 รอ Approve MD</span></span>
-            <span style="flex:1;font-size:11px;font-weight:700;color:var(--navy)">85.50</span>
-            <span style="flex:1"><button class="mk-btn-sm mk-btn-view">👁 ดูผล</button></span>
-          </div>
-          <div class="mk-table-row">
-            <span style="flex:2;font-size:11px;font-weight:600">นารี สุขใจ (Supervisor)</span>
-            <span style="flex:1;font-size:10px;color:var(--muted)">การเงิน</span>
-            <span style="flex:1"><span class="mk-chip app1">📋 รอ Approve ขั้น 2</span></span>
-            <span style="flex:1;font-size:11px;font-weight:700;color:var(--navy)">91.00</span>
-            <span style="flex:1"><button class="mk-btn-sm mk-btn-view">👁 ดูผล</button></span>
+          <div class="mk-stepper-wrap">
+            <div class="mk-stepper">
+              <div class="mk-step waiting">
+                <div class="mk-step-circle">⏳</div>
+                <div class="mk-step-label">รอผลประเมิน<div class="mk-step-count">2</div><div class="mk-step-count-label">ราย</div></div>
+              </div>
+              <div class="mk-step unacked">
+                <div class="mk-step-circle">🙋</div>
+                <div class="mk-step-label">รอพนักงานรับทราบ<div class="mk-step-count">1</div><div class="mk-step-count-label">ราย</div></div>
+              </div>
+              <div class="mk-step pend">
+                <div class="mk-step-circle">📋</div>
+                <div class="mk-step-label">รอ Approve จากผู้จัดการฝ่าย<div class="mk-step-count">3</div><div class="mk-step-count-label">ราย</div></div>
+              </div>
+              <div class="mk-step pend">
+                <div class="mk-step-circle">📋</div>
+                <div class="mk-step-label">รอ Approve จากผู้ช่วยกรรมการ<div class="mk-step-count">2</div><div class="mk-step-count-label">ราย</div></div>
+              </div>
+              <div class="mk-step pend pulse-s">
+                <div class="mk-step-circle"><span class="mk-step-badge">7</span>📋</div>
+                <div class="mk-step-label">รอ Approve จากกรรมการผู้จัดการ<div class="mk-step-count">7</div><div class="mk-step-count-label">ราย</div></div>
+              </div>
+              <div class="mk-step done">
+                <div class="mk-step-circle">✓</div>
+                <div class="mk-step-label">เสร็จสิ้น<div class="mk-step-count">15</div><div class="mk-step-count-label">ราย</div></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -659,14 +849,79 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
 
     <div class="step-card">
       <div class="step-top">
-        <div class="step-num">2</div>
+        <div class="step-num" style="background:var(--blue)">2</div>
+        <div class="step-body">
+          <h4>กดที่ "📋 รายชื่อผู้ใต้บังคับบัญชาที่ต้องดำเนินการ"</h4>
+          <p>ระบบแสดงเฉพาะคนที่อยู่ใต้บังคับบัญชาโดยตรง พร้อมตัวเลขจำนวนที่รอดำเนินการ กรอกคะแนนและกด <strong>"💾 บันทึกคะแนน"</strong></p>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-label">ตัวอย่างปุ่มรายชื่อผู้ใต้บังคับบัญชา</div>
+        <div class="mockup-frame">
+          <div style="padding:16px;text-align:center">
+            <button style="display:inline-flex;align-items:center;gap:10px;background:var(--teal);color:#fff;border:none;padding:11px 24px;border-radius:8px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer">
+              📋 รายชื่อผู้ใต้บังคับบัญชาที่ต้องดำเนินการ
+              <span style="background:rgba(255,255,255,0.25);color:#fff;min-width:22px;height:22px;padding:0 5px;border-radius:11px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;line-height:1">3</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART B: APPROVE -->
+  <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#2e7d32;margin:18px 0 10px;display:flex;align-items:center;gap:8px">
+    <span style="background:#2e7d32;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">B</span>
+    Approve ขั้นสุดท้าย
+  </div>
+
+  <div class="steps">
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num" style="background:#2e7d32">1</div>
+        <div class="step-body">
+          <h4>กด Stepper ขั้นสุดท้าย "รอ MD"</h4>
+          <p>ทุก role — หัวหน้าแผนก ผู้จัดการฝ่าย และผู้ช่วยกรรมการผู้จัดการ จะมาจบที่ท่าน Badge แสดงจำนวนรวมทั้งหมด</p>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-label">ตัวอย่างตาราง — รายที่รอ Approve MD</div>
+        <div class="mockup-frame">
+          <div class="mk-table-head">
+            <span style="flex:2.5">ชื่อ-นามสกุล</span>
+            <span style="flex:0.7">ฝ่าย</span>
+            <span style="flex:1.8">สถานะ</span>
+            <span style="flex:0.8">คะแนน</span>
+            <span style="flex:0.8"></span>
+          </div>
+          <div class="mk-table-row">
+            <span style="flex:2.5;font-size:11px;font-weight:600">สมหญิง รักงาน</span>
+            <span style="flex:0.7;font-size:10px;color:var(--muted)">การเงิน</span>
+            <span style="flex:1.8"><span class="mk-chip app1">📋 รอ Approve MD</span></span>
+            <span style="flex:0.8;font-size:11px;font-weight:700;color:var(--navy)">85.50</span>
+            <span style="flex:0.8"><button class="mk-btn-sm mk-btn-view">👁 ดูผล</button></span>
+          </div>
+          <div class="mk-table-row">
+            <span style="flex:2.5;font-size:11px;font-weight:600">นารี สุขใจ (Supervisor)</span>
+            <span style="flex:0.7;font-size:10px;color:var(--muted)">การเงิน</span>
+            <span style="flex:1.8"><span class="mk-chip app1">📋 รอ Approve ขั้น 2</span></span>
+            <span style="flex:0.8;font-size:11px;font-weight:700;color:var(--navy)">91.00</span>
+            <span style="flex:0.8"><button class="mk-btn-sm mk-btn-view">👁 ดูผล</button></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num" style="background:#2e7d32">2</div>
         <div class="step-body">
           <h4>Approve — สถานะเปลี่ยนเป็น ✅ เสร็จสิ้น</h4>
           <p>กด <strong>"👁 ดูผล"</strong> ตรวจสอบ แล้วกด <strong>"✓ Approve"</strong> — สถานะจะเปลี่ยนเป็น เสร็จสิ้น ทันที</p>
         </div>
       </div>
       <div class="mockup-wrap">
-        <div class="mockup-label">หลัง MD Approve — สถานะสุดท้าย</div>
+        <div class="mockup-label">Banner หลัง MD Approve — สถานะสุดท้าย</div>
         <div class="mockup-frame" style="padding:12px 16px">
           <div class="mk-banner">
             <div class="mk-stage done-s">✓ รอการประเมิน</div>
@@ -680,9 +935,9 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
         </div>
       </div>
     </div>
-
   </div>
-  <div class="cta"><p>พร้อมเข้าใช้งานแล้ว</p><a href="[LINK]" target="_blank">เข้าสู่ระบบ →</a></div>
+
+  <div class="cta"><p>ระบบเปิดใช้งานหลังอบรม</p><a href="[LINK]" target="_blank">รอลิงก์อีกครั้ง →</a></div>
 </div>
 
 </div><!-- end .content -->
