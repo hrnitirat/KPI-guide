@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือระบบประเมิน KPI 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0f2a4a;--blue:#1e4d8c;--teal:#0d7a6b;--teal-l:#12a08e;
+  --gold:#c8973a;--gold-l:#e8b84b;--bg:#f0f4f8;--card:#fff;
+  --text:#1a2535;--muted:#6b7a8d;--border:#dde3ec;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--blue) 55%,var(--teal) 100%);padding:44px 24px 60px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:260px;height:260px;background:rgba(255,255,255,.04);border-radius:50%}
+.hero-icon{font-size:48px;margin-bottom:14px;display:block}
+.hero h1{font-size:24px;font-weight:700;color:#fff;margin-bottom:6px}
+.hero p{font-size:14px;color:rgba(255,255,255,.72);max-width:440px;margin:0 auto}
+
+/* ROLE SELECTOR */
+.role-wrap{max-width:620px;margin:-28px auto 0;padding:0 20px;position:relative;z-index:10}
+.role-card{background:#fff;border-radius:18px;padding:24px;box-shadow:0 8px 40px rgba(0,0,0,.12)}
+.role-card h2{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:14px;text-align:center}
+.role-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.role-btn{border:2px solid var(--border);background:#fff;border-radius:12px;padding:13px 10px;cursor:pointer;font-family:inherit;text-align:center;transition:all .2s}
+.role-btn:hover,.role-btn.active{border-color:var(--teal);background:linear-gradient(135deg,#f0faf8,#e8f5f2)}
+.role-btn .rb-icon{font-size:24px;display:block;margin-bottom:5px}
+.role-btn .rb-title{font-size:12px;font-weight:700;color:var(--navy)}
+.role-btn .rb-sub{font-size:10px;color:var(--muted);margin-top:2px}
+
+/* CONTENT */
+.content{max-width:620px;margin:0 auto;padding:22px 20px 56px}
+.section{display:none;animation:fadeIn .3s ease}
+.section.show{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.back-btn{display:flex;align-items:center;gap:6px;background:none;border:none;color:var(--muted);font-family:inherit;font-size:13px;cursor:pointer;margin-bottom:14px;padding:0}
+.back-btn:hover{color:var(--teal)}
+
+.role-header{background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:14px;padding:18px 20px;color:#fff;margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.role-header .rh-icon{font-size:30px;flex-shrink:0}
+.role-header h3{font-size:15px;font-weight:700;margin-bottom:3px}
+.role-header p{font-size:12px;opacity:.8;line-height:1.5}
+
+/* STEP CARDS */
+.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.step-card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.step-top{padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
+.step-num{width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-body h4{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.step-body p{font-size:12px;color:var(--muted);line-height:1.6}
+.step-body .tip{margin-top:6px;background:#fff8e1;border-left:3px solid var(--gold);padding:5px 9px;border-radius:0 6px 6px 0;font-size:11px;color:#7a5c00}
+
+/* MOCKUP CONTAINER */
+.mockup-wrap{border-top:1px solid var(--border);background:#f5f7fa;padding:14px 16px}
+.mockup-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.mockup-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.mockup-frame{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+
+/* ─── MOCKUP: LOGIN ─── */
+.mk-login{padding:28px 20px;text-align:center}
+.mk-login-logo{width:44px;height:44px;background:linear-gradient(135deg,var(--teal),var(--blue));border-radius:10px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.mk-login h3{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.mk-login p{font-size:11px;color:var(--muted);margin-bottom:18px}
+.mk-field{text-align:left;margin-bottom:10px}
+.mk-field label{font-size:10px;font-weight:600;color:var(--muted);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.mk-field .mk-input{width:100%;height:34px;background:#f8f9fb;border:1.5px solid var(--border);border-radius:8px;padding:0 12px;font-size:12px;color:var(--text);font-family:inherit;display:flex;align-items:center}
+.mk-btn-login{width:100%;height:36px;background:var(--teal);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;margin-top:4px;cursor:pointer;font-family:inherit}
+
+/* ─── MOCKUP: NAVBAR ─── */
+.mk-nav{background:var(--navy);height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 14px}
+.mk-nav-brand{display:flex;align-items:center;gap:7px;color:#fff;font-size:12px;font-weight:600}
+.mk-nav-logo{width:22px;height:22px;background:linear-gradient(135deg,var(--teal),var(--blue));border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px}
+.mk-nav-right{display:flex;align-items:center;gap:8px}
+.mk-nav-avatar{width:24px;height:24px;background:linear-gradient(135deg,var(--teal),var(--gold));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff}
+.mk-nav-name{font-size:10px;color:rgba(255,255,255,.8)}
+.mk-nav-logout{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:3px 8px;border-radius:4px;font-size:9px;font-family:inherit;cursor:pointer}
+
+/* ─── MOCKUP: EMP CARD ─── */
+.mk-emp-card{background:linear-gradient(135deg,var(--navy),var(--blue) 60%,var(--teal));padding:14px 16px;color:#fff;position:relative;overflow:hidden}
+.mk-emp-card::before{content:'';position:absolute;top:-24px;right:-24px;width:100px;height:100px;background:rgba(255,255,255,.05);border-radius:50%}
+.mk-emp-name{font-size:14px;font-weight:700}
+.mk-emp-pos{font-size:10px;opacity:.75;margin-bottom:10px}
+.mk-emp-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mk-meta-item .mk-meta-l{font-size:8px;opacity:.6;text-transform:uppercase}
+.mk-meta-item .mk-meta-v{font-size:11px;font-weight:600}
+
+/* ─── MOCKUP: BANNER 4-STAGE ─── */
+.mk-banner{display:flex;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin:10px 0}
+.mk-stage{flex:1;padding:8px 4px;text-align:center;font-size:10px;font-weight:500;background:#f9fafb;color:#9ca3af;border-right:1px solid var(--border)}
+.mk-stage:last-child{border-right:none}
+.mk-stage.active-s0{background:#fff8e1;color:#b45309;font-weight:700}
+.mk-stage.active-s1{background:#e8f0fe;color:#3b4ea6;font-weight:700}
+.mk-stage.active-s2{background:#ede9fe;color:#5b21b6;font-weight:700}
+.mk-stage.active-s3{background:#e8f5e9;color:#2e7d32;font-weight:700}
+.mk-stage.done-s{background:#f0f4f8;color:#2e7d32;font-weight:500}
+
+/* ─── MOCKUP: SCORE ROWS ─── */
+.mk-section-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);padding:10px 16px 6px;border-top:1px solid var(--border)}
+.mk-score-row{display:flex;align-items:center;gap:10px;padding:8px 16px;border-bottom:1px solid #f0f4f8}
+.mk-q-num{width:22px;height:22px;background:var(--bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--muted);flex-shrink:0}
+.mk-q-label{flex:1;font-size:11px;font-weight:600;color:var(--text)}
+.mk-bar-wrap{width:60px;height:4px;background:var(--bg);border-radius:2px;overflow:hidden}
+.mk-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--teal),var(--teal-l))}
+.mk-score-val{font-size:12px;font-weight:700;color:var(--navy);min-width:36px;text-align:right}
+.mk-score-max{font-size:9px;color:var(--muted)}
+.mk-hr-badge{font-size:8px;background:var(--gold-l);color:var(--navy);padding:1px 5px;border-radius:3px;font-weight:700;flex-shrink:0}
+
+/* ─── MOCKUP: TOTALS ─── */
+.mk-totals{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:10px 16px}
+.mk-total-card{border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}
+.mk-total-card.hl{background:linear-gradient(135deg,var(--navy),var(--blue));border-color:transparent}
+.mk-total-card.dk{background:#fff8f6;border-color:#ffccbc}
+.mk-total-title{font-size:9px;color:var(--muted);margin-bottom:4px}
+.mk-total-card.hl .mk-total-title{color:rgba(255,255,255,.7)}
+.mk-total-val{font-size:18px;font-weight:700;color:var(--navy)}
+.mk-total-card.hl .mk-total-val{color:#fff}
+.mk-total-card.dk .mk-total-val{color:#d84315}
+
+/* ─── MOCKUP: ACK BUTTON ─── */
+.mk-ack-zone{padding:16px;text-align:center;border-top:1px solid var(--border)}
+.mk-ack-btn{display:inline-block;background:var(--teal);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;animation:glow 1.8s ease-in-out infinite}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(13,122,107,.6)}50%{box-shadow:0 0 10px 4px rgba(13,122,107,.3)}100%{box-shadow:0 0 0 0 rgba(13,122,107,.6)}}
+.mk-acked{background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:10px 16px;color:#2e7d32;font-size:12px;font-weight:500;margin:0 16px}
+
+/* ─── MOCKUP: STEPPER ─── */
+.mk-stepper-wrap{padding:16px;background:#fff}
+.mk-stepper{display:flex;align-items:flex-start;position:relative;overflow:visible}
+.mk-stepper::before{content:'';position:absolute;top:15px;left:20px;right:20px;height:2px;background:var(--border);z-index:0}
+.mk-step{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;position:relative;z-index:1}
+.mk-step-circle{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid #cbd5e0;background:#f7f8fa;color:#a0aec0}
+.mk-step-circle.wt{background:#fff8e1;border-color:#f59e0b;color:#b45309}
+.mk-step-circle.un{background:#e8f0fe;border-color:#6b7ff7;color:#3b4ea6}
+.mk-step-circle.pnd{background:#ede9fe;border-color:#7c5cbf;color:#5b21b6}
+.mk-step-circle.dn{background:#e8f5e9;border-color:#4caf50;color:#2e7d32}
+.mk-step-circle.puls{animation:ring 1.6s ease-in-out infinite;border-color:#7c5cbf}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(124,92,191,.5)}60%{box-shadow:0 0 0 5px rgba(124,92,191,0)}100%{box-shadow:0 0 0 0 rgba(124,92,191,0)}}
+.mk-step-label{font-size:8px;text-align:center;color:var(--muted);max-width:52px;line-height:1.3}
+.mk-step-badge{font-size:8px;background:var(--navy);color:#fff;padding:1px 5px;border-radius:8px;margin-top:2px;display:inline-block}
+.mk-step-badge.y{background:#f59e0b}
+.mk-step-badge.p{background:#7c5cbf}
+.mk-step-badge.g{background:#4caf50}
+
+/* ─── MOCKUP: TABLE ─── */
+.mk-table-head{background:#f8f9fb;padding:8px 16px;display:flex;gap:8px;font-size:9px;font-weight:700;color:var(--muted);border-bottom:1px solid var(--border)}
+.mk-table-row{padding:9px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #f8f9fb;font-size:11px}
+.mk-table-row:last-child{border-bottom:none}
+.mk-chip{padding:2px 7px;border-radius:10px;font-size:9px;font-weight:600}
+.mk-chip.pend{background:#fff8e1;color:#b45309}
+.mk-chip.sub{background:#e8f0fe;color:#3b4ea6}
+.mk-chip.app1{background:#f3f0ff;color:#5b21b6}
+.mk-chip.done-c{background:#e8f5e9;color:#2e7d32}
+.mk-btn-sm{padding:3px 9px;border-radius:5px;font-size:9px;font-weight:700;border:none;cursor:pointer;font-family:inherit}
+.mk-btn-eval{background:var(--teal);color:#fff}
+.mk-btn-view{background:#e9ecef;color:var(--muted)}
+.mk-btn-approve{background:linear-gradient(135deg,var(--teal),var(--teal-l));color:#fff}
+
+/* ─── MOCKUP: FORM SCORING ─── */
+.mk-form-score-row{display:flex;align-items:center;gap:8px;padding:8px 16px;border-bottom:1px solid #f8f9fb}
+.mk-input-score{width:50px;height:26px;border:1.5px solid var(--border);border-radius:6px;text-align:center;font-size:12px;font-weight:700;color:var(--navy);background:#f8f9fb;font-family:inherit}
+.mk-input-score.filled{border-color:var(--teal);background:#f0faf8;color:var(--teal)}
+
+/* ─── MOCKUP: APPROVE FORM ─── */
+.mk-approve-bar{padding:14px 16px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;background:#fafbfc}
+.mk-btn-cancel{background:#fff;border:1px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:6px;font-size:11px;font-family:inherit;cursor:pointer}
+.mk-btn-approve-main{background:linear-gradient(135deg,var(--teal),var(--teal-l));color:#fff;border:none;padding:7px 18px;border-radius:7px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer}
+
+/* INFO / PILLS */
+.info-block{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.info-block h4{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.info-block ul{padding-left:16px}
+.info-block ul li{font-size:12px;color:var(--muted);margin-bottom:3px;line-height:1.6}
+.info-block ul li strong{color:var(--text)}
+.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.pill{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:600}
+.pill.y{background:#fff8e1;color:#b45309}
+.pill.b{background:#e8f0fe;color:#3b4ea6}
+.pill.p{background:#ede9fe;color:#5b21b6}
+.pill.g{background:#e8f5e9;color:#2e7d32}
+
+.cta{background:linear-gradient(135deg,var(--teal),var(--teal-l));border-radius:12px;padding:18px;text-align:center;margin-top:18px}
+.cta p{color:#fff;font-size:13px;font-weight:500;margin-bottom:12px}
+.cta a{display:inline-block;background:#fff;color:var(--teal);font-weight:700;font-size:13px;padding:9px 24px;border-radius:7px;text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="hero-icon">📊</span>
+  <h1>คู่มือระบบประเมิน KPI 2025</h1>
+  <p>เลือกบทบาทของท่านเพื่อดูขั้นตอนและตัวอย่างหน้าจอที่เกี่ยวข้อง</p>
+</div>
+
+<div class="role-wrap">
+  <div class="role-card">
+    <h2>ท่านเป็นใครในระบบนี้?</h2>
+    <div class="role-btns">
+      <button class="role-btn" onclick="showSection('emp',this)">
+        <span class="rb-icon">🙋‍♂️</span>
+        <div class="rb-title">พนักงานทั่วไป</div>
+        <div class="rb-sub">ดูผล + รับทราบคะแนน</div>
+      </button>
+      <button class="role-btn" onclick="showSection('sup',this)">
+        <span class="rb-icon">✏️</span>
+        <div class="rb-title">หัวหน้าแผนก</div>
+        <div class="rb-sub">กรอกคะแนน + ส่งผล</div>
+      </button>
+      <button class="role-btn" onclick="showSection('mgr',this)">
+        <span class="rb-icon">✅</span>
+        <div class="rb-title">ผู้จัดการฝ่าย / ผช.กรรมการฯ</div>
+        <div class="rb-sub">Approve คะแนน</div>
+      </button>
+      <button class="role-btn" onclick="showSection('md',this)">
+        <span class="rb-icon">🏢</span>
+        <div class="rb-title">กรรมการผู้จัดการ</div>
+        <div class="rb-sub">Approve ขั้นสุดท้าย</div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════════════════════════════
+     EMPLOYEE
+═══════════════════════════════════════════ -->
+<div class="section" id="sec-emp">
+  <button class="back-btn" onclick="goBack()">← เปลี่ยนบทบาท</button>
+  <div class="role-header">
+    <div class="rh-icon">🙋‍♂️</div>
+    <div><h3>พนักงานทั่วไป</h3><p>ตรวจสอบผลคะแนนที่หัวหน้าแผนกประเมินให้ และกดรับทราบ</p></div>
+  </div>
+
+  <div class="steps">
+
+    <!-- STEP 1: LOGIN -->
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>เข้าสู่ระบบ</h4>
+          <p>ใช้ <strong>รหัสพนักงาน</strong> และ <strong>เลขบัตรประชาชน 13 หลัก</strong> ในการ Login</p>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-label">ตัวอย่างหน้าจอ Login</div>
+        <div class="mockup-frame">
+          <div class="mk-login">
+            <div class="mk-login-logo">📊</div>
+            <h3>ระบบประเมิน KPI</h3>
+            <p>กรุณาเข้าสู่ระบบด้วยข้อมูลพนักงาน</p>
+            <div class="mk-field">
+              <label>รหัสพนักงาน</label>
+              <div class="mk-input">1234</div>
+            </div>
+            <div class="mk-field">
+              <label>เลขบัตรประชาชน 13 หลัก</label>
+              <div class="mk-input" style="letter-spacing:2px;color:#aaa">1 •••• •••• •••• •</div>
+            </div>
+            <button class="mk-btn-login">เข้าสู่ระบบ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: BANNER STATUS -->
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>ดู Banner สถานะของท่าน</h4>
+          <p>Banner 4 ขั้นแสดงให้เห็นว่าตอนนี้อยู่ขั้นไหน — <strong style="color:var(--blue)">ขั้นที่กำลังดำเนินการ</strong>จะมีสีเข้มกว่า</p>
+          <div class="tip">💡 Banner จะอัพเดทอัตโนมัติเมื่อสถานะเปลี่ยน ไม่ต้อง Refresh</div>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-label">ตัวอย่าง Banner — สถานะ "ประเมินแล้ว รอกดรับทราบ"</div>
+        <div class="mockup-frame" style="padding:12px 16px">
+          <div class="mk-banner">
+            <div class="mk-stage done-s">✓ รอการประเมิน</div>
+            <div class="mk-stage active-s1">● ประเมินแล้ว รอกดรับทราบ</div>
+            <div class="mk-stage">รอ Approve จากผู้บังคับบัญชา</div>
+            <div class="mk-stage">เสร็จสิ้น</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: VIEW SCORES -->
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>ตรวจสอบผลคะแนน</h4>
+          <p>ดูคะแนนส่วนที่ 1 (สมรรถนะ) และส่วนที่ 2 (การมาทำงาน) พร้อมสรุปคะแนนรวมและเกรด</p>
+          <div class="tip">💡 กดปุ่ม i ที่มุมบัตรเกรด เพื่อดูเกณฑ์การตัดเกรด A–E</div>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-label">ตัวอย่างผลคะแนน</div>
+        <div class="mockup-frame">
+          <div class="mk-section-title">ส่วนที่ 1 — ผลการประเมินสมรรถนะ</div>
+          <div class="mk-score-row">
+            <div class="mk-q-num">1</div>
+            <div class="mk-q-label">ความรู้ในงาน</div>
+            <div class="mk-bar-wrap"><div class="mk-bar-fill" style="width:82%"></div></div>
+            <div class="mk-score-val">8.2<span class="mk-score-max">/10</span></div>
+          </div>
+          <div class="mk-score-row">
+            <div class="mk-q-num">2</div>
+            <div class="mk-q-label">การทำงานเป็นทีม</div>
+            <div class="mk-bar-wrap"><div class="mk-bar-fill" style="width:75%"></div></div>
+            <div class="mk-score-val">7.5<span class="mk-score-max">/10</span></div>
+          </div>
+          <div class="mk-score-row">
+            <div class="mk-q-num">3</div>
+            <div class="mk-q-label">ผลงาน (HR)</div>
+            <div class="mk-hr-badge">HR</div>
+            <div class="mk-bar-wrap"><div class="mk-bar-fill" style="width:80%"></div></div>
+            <div class="mk-score-val">16<span class="mk-score-max">/20</span></div>
+          </div>
+          <div class="mk-section-title">สรุปคะแนน</div>
+          <div class="mk-totals">
+            <div class="mk-total-card">
+              <div class="mk-total-title">คะแนนส่วนที่ 1</div>
+              <div class="mk-total-val">85.50</div>
+            </div>
+            <div class="mk-total-card dk">
+              <div class="mk-total-title">หักส่วนที่ 2</div>
+              <div class="mk-total-val">0.60</div>
+            </div>
+            <div class="mk-total-card hl">
+              <div class="mk-total-title">คะแนนรวม</div>
+              <div class="mk-total-val">84.90</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: ACKNOWLEDGE -->
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>กดรับทราบผลการประเมิน</h4>
+          <p>เลื่อนลงด้านล่างสุดของหน้า จะพบปุ่ม <strong>"✅ รับทราบผลการประเมิน"</strong> กดและยืนยันใน popup</p>
+          <div class="tip">⚠️ กดได้ 1 ครั้ง ไม่สามารถย้อนกลับได้ กรุณาตรวจสอบคะแนนก่อนกด</div>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-label">ตัวอย่างปุ่มรับทราบ (ก่อนกด)</div>
+        <div class="mockup-frame">
+          <div class="mk-ack-zone">
+            <div style="font-size:28px;margin-bottom:8px">📋</div>
+            <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px">รับทราบผลการประเมิน</div>
+            <div style="font-size:11px;color:var(--muted);margin-bottom:14px">กรุณาตรวจสอบผลคะแนนด้านบนก่อนกดรับทราบ</div>
+            <button class="mk-ack-btn">✅ รับทราบผลการประเมิน</button>
+          </div>
+        </div>
+        <div style="height:8px"></div>
+        <div class="mockup-label">หลังกดรับทราบแล้ว</div>
+        <div class="mockup-frame" style="padding:12px 16px">
+          <div class="mk-acked">✅ คุณได้รับทราบผลการประเมินนี้แล้ว</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="cta"><p>พร้อมเข้าใช้งานแล้ว</p><a href="[LINK]" target="_blank">เข้าสู่ระบบ →</a></div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SUPERVISOR
+═══════════════════════════════════════════ -->
+<div class="section" id="sec-sup">
+  <button class="back-btn" onclick="goBack()">← เปลี่ยนบทบาท</button>
+  <div class="role-header">
+    <div class="rh-icon">✏️</div>
+    <div><h3>หัวหน้าแผนก (Supervisor)</h3><p>ประเมินและกรอกคะแนนให้ผู้ใต้บังคับบัญชา</p></div>
+  </div>
+
+  <div class="steps">
+
+    <!-- STEP 1: STEPPER -->
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>หน้า Evaluate — ดู Stepper</h4>
+          <p>Stepper แสดง 6 ขั้น Badge สีแสดงจำนวนคนในแต่ละขั้น — กดที่ขั้น <strong>"รอประเมิน"</strong> เพื่อเริ่ม</p>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-label">ตัวอย่าง Stepper</div>
+        <div class="mockup-frame">
+          <div class="mk-nav">
+            <div class="mk-nav-brand"><div class="mk-nav-logo">📊</div>ระบบประเมิน KPI</div>
+            <div class="mk-nav-right">
+              <div class="mk-nav-avatar">ส</div>
+              <span class="mk-nav-name">สมชาย ใจดี</span>
+              <button class="mk-nav-logout">ออกจากระบบ</button>
+            </div>
+          </div>
+          <div class="mk-stepper-wrap">
+            <div class="mk-stepper">
+              <div class="mk-step">
+                <div class="mk-step-circle wt">⏳</div>
+                <div class="mk-step-label">รอ<br>ประเมิน</div>
+                <span class="mk-step-badge y">8</span>
+              </div>
+              <div class="mk-step">
+                <div class="mk-step-circle un">🙋</div>
+                <div class="mk-step-label">รอ<br>รับทราบ</div>
+                <span class="mk-step-badge" style="background:#6b7ff7">3</span>
+              </div>
+              <div class="mk-step">
+                <div class="mk-step-circle pnd puls">📋</div>
+                <div class="mk-step-label">รอ<br>Approve 1</div>
+                <span class="mk-step-badge p">2</span>
+              </div>
+              <div class="mk-step">
+                <div class="mk-step-circle pnd">📋</div>
+                <div class="mk-step-label">รอ<br>Approve 2</div>
+                <span class="mk-step-badge p">0</span>
+              </div>
+              <div class="mk-step">
+                <div class="mk-step-circle pnd">📋</div>
+                <div class="mk-step-label">รอ<br>MD</div>
+                <span class="mk-step-badge p">1</span>
+              </div>
+              <div class="mk-step">
+                <div class="mk-step-circle dn">✓</div>
+                <div class="mk-step-label">เสร็จ<br>สิ้น</div>
+                <span class="mk-step-badge g">12</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: TABLE -->
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>เลือกพนักงานจากตาราง</h4>
+          <p>กด <strong>"📝 ประเมิน"</strong> หน้าชื่อพนักงานที่ต้องการกรอกคะแนน — ปุ่มจะเปลี่ยนเป็น <strong>"👁 ดูผล"</strong> เมื่อพนักงานกดรับทราบแล้ว</p>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-label">ตัวอย่างตารางรายชื่อ</div>
+        <div class="mockup-frame">
+          <div class="mk-table-head">
+            <span style="flex:2">ชื่อ-นามสกุล</span>
+            <span style="flex:1">ทีม</span>
+            <span style="flex:1">สถานะ</span>
+            <span style="flex:1">คะแนน</span>
+            <span style="flex:1"></span>
+          </div>
+          <div class="mk-table-row">
+            <span style="flex:2;font-size:11px;font-weight:600">สมหญิง รักงาน</span>
+            <span style="flex:1;font-size:10px;color:var(--muted)">ทีม A</span>
+            <span style="flex:1"><span class="mk-chip pend">⏳ รอประเมิน</span></span>
+            <span style="flex:1;color:var(--muted);font-size:11px">-</span>
+            <span style="flex:1"><button class="mk-btn-sm mk-btn-eval">📝 ประเมิน</button></span>
+          </div>
+          <div class="mk-table-row">
+            <span style="flex:2;font-size:11px;font-weight:600">วิชัย มานะ</span>
+            <span style="flex:1;font-size:10px;color:var(--muted)">ทีม A</span>
+            <span style="flex:1"><span class="mk-chip sub">🙋 รอรับทราบ</span></span>
+            <span style="flex:1;font-size:11px;font-weight:700;color:var(--navy)">82.50</span>
+            <span style="flex:1"><button class="mk-btn-sm mk-btn-view">✏️ แก้ไข</button></span>
+          </div>
+          <div class="mk-table-row">
+            <span style="flex:2;font-size:11px;font-weight:600">นารี สุขใจ</span>
+            <span style="flex:1;font-size:10px;color:var(--muted)">ทีม B</span>
+            <span style="flex:1"><span class="mk-chip app1">📋 รอ Approve ขั้น 1</span></span>
+            <span style="flex:1;font-size:11px;font-weight:700;color:var(--navy)">78.30</span>
+            <span style="flex:1"><button class="mk-btn-sm mk-btn-view">👁 ดูผล</button></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: FORM SCORING -->
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>กรอกคะแนนแต่ละข้อ</h4>
+          <p>พิมพ์คะแนนในช่องแต่ละข้อ คะแนนรวมจะคำนวณอัตโนมัติ ข้อที่ติด badge <strong>HR</strong> = HR เป็นผู้กรอกให้</p>
+          <div class="tip">💡 กรณีไม่มีคะแนน HR แสดง สามารถกรอกตัวเลขได้เลย</div>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-label">ตัวอย่างฟอร์มกรอกคะแนน</div>
+        <div class="mockup-frame">
+          <div class="mk-section-title">ส่วนที่ 1 — ผลการประเมินสมรรถนะ</div>
+          <div class="mk-form-score-row">
+            <div class="mk-q-num">1</div>
+            <div class="mk-q-label" style="flex:1;font-size:11px;font-weight:600">ความรู้ในงาน</div>
+            <div style="font-size:9px;color:var(--muted)">เต็ม 10</div>
+            <input class="mk-input-score filled" value="8" readonly>
+          </div>
+          <div class="mk-form-score-row">
+            <div class="mk-q-num">2</div>
+            <div class="mk-q-label" style="flex:1;font-size:11px;font-weight:600">การทำงานเป็นทีม</div>
+            <div style="font-size:9px;color:var(--muted)">เต็ม 10</div>
+            <input class="mk-input-score" placeholder="-" readonly>
+          </div>
+          <div class="mk-form-score-row">
+            <div class="mk-q-num">3</div>
+            <div class="mk-q-label" style="flex:1;font-size:11px;font-weight:600">ผลงาน</div>
+            <div class="mk-hr-badge" style="margin-right:4px">HR</div>
+            <div style="font-size:9px;color:var(--muted)">เต็ม 20</div>
+            <input class="mk-input-score filled" value="16" readonly>
+          </div>
+          <div class="mk-approve-bar" style="border-top:1px solid var(--border);padding:10px 16px">
+            <button class="mk-btn-cancel">ยกเลิก</button>
+            <button class="mk-btn-approve-main">💾 บันทึกคะแนน</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="cta"><p>พร้อมเข้าใช้งานแล้ว</p><a href="[LINK]" target="_blank">เข้าสู่ระบบ →</a></div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MANAGER / ASSISTANT
+═══════════════════════════════════════════ -->
+<div class="section" id="sec-mgr">
+  <button class="back-btn" onclick="goBack()">← เปลี่ยนบทบาท</button>
+  <div class="role-header">
+    <div class="rh-icon">✅</div>
+    <div><h3>ผู้จัดการฝ่าย / ผช.กรรมการฯ</h3><p>Approve คะแนน — เปรียบเสมือนการเซ็นรับรองเอกสาร</p></div>
+  </div>
+
+  <div class="steps">
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>กด Stepper ขั้น "รอ Approve"</h4>
+          <p>ดู Badge จำนวนคนที่รอท่าน Approve — <strong>กด Approve ได้เฉพาะรายที่พนักงานกดรับทราบแล้วเท่านั้น</strong></p>
+          <div class="tip">💡 ถ้าเห็น ⚠️ "รอพนักงานรับทราบก่อน" — ยังกด Approve ไม่ได้</div>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-label">ตัวอย่างตาราง — รายที่รอ Approve</div>
+        <div class="mockup-frame">
+          <div class="mk-table-head">
+            <span style="flex:2">ชื่อ-นามสกุล</span>
+            <span style="flex:1">แผนก</span>
+            <span style="flex:1">สถานะ</span>
+            <span style="flex:1">คะแนน</span>
+            <span style="flex:1"></span>
+          </div>
+          <div class="mk-table-row">
+            <span style="flex:2;font-size:11px;font-weight:600">สมหญิง รักงาน</span>
+            <span style="flex:1;font-size:10px;color:var(--muted)">บัญชี</span>
+            <span style="flex:1"><span class="mk-chip app1">📋 รอ Approve ขั้น 1</span></span>
+            <span style="flex:1;font-size:11px;font-weight:700;color:var(--navy)">85.50</span>
+            <span style="flex:1"><button class="mk-btn-sm mk-btn-view">👁 ดูผล</button></span>
+          </div>
+          <div class="mk-table-row">
+            <span style="flex:2;font-size:11px;font-weight:600">วิชัย มานะ</span>
+            <span style="flex:1;font-size:10px;color:var(--muted)">บัญชี</span>
+            <span style="flex:1"><span class="mk-chip app1">📋 รอ Approve ขั้น 1</span></span>
+            <span style="flex:1;font-size:11px;font-weight:700;color:var(--navy)">79.20</span>
+            <span style="flex:1"><button class="mk-btn-sm mk-btn-view">👁 ดูผล</button></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>ตรวจสอบคะแนนและกด Approve</h4>
+          <p>กด <strong>"👁 ดูผล"</strong> เพื่อเปิดดูรายละเอียด ตรวจสอบคะแนนรวม แล้วกดปุ่ม <strong>"✓ Approve"</strong></p>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-label">ตัวอย่างปุ่ม Approve ในหน้ารายละเอียด</div>
+        <div class="mockup-frame">
+          <div style="padding:12px 16px;border-bottom:1px solid var(--border)">
+            <div style="font-size:13px;font-weight:700;color:var(--navy)">สมหญิง รักงาน</div>
+            <div style="font-size:10px;color:var(--muted)">แผนกบัญชี · คะแนนรวม 85.50</div>
+          </div>
+          <div class="mk-approve-bar">
+            <button class="mk-btn-cancel">ยกเลิก</button>
+            <button class="mk-btn-approve-main">✓ Approve</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="cta"><p>พร้อมเข้าใช้งานแล้ว</p><a href="[LINK]" target="_blank">เข้าสู่ระบบ →</a></div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MD
+═══════════════════════════════════════════ -->
+<div class="section" id="sec-md">
+  <button class="back-btn" onclick="goBack()">← เปลี่ยนบทบาท</button>
+  <div class="role-header">
+    <div class="rh-icon">🏢</div>
+    <div><h3>กรรมการผู้จัดการ (MD)</h3><p>Approve ขั้นสุดท้าย — เมื่อท่าน Approve กระบวนการเสร็จสิ้น</p></div>
+  </div>
+
+  <div class="steps">
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>กด Stepper ขั้นสุดท้าย "รอ MD"</h4>
+          <p>ทุก role รวมถึงหัวหน้าแผนก ผู้จัดการ และผู้ช่วยกรรมการ จะมาจบที่ท่าน Badge แสดงจำนวนที่รอ</p>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-label">ตัวอย่างตาราง — รายที่รอ MD Approve</div>
+        <div class="mockup-frame">
+          <div class="mk-table-head">
+            <span style="flex:2">ชื่อ-นามสกุล</span>
+            <span style="flex:1">ฝ่าย</span>
+            <span style="flex:1">สถานะ</span>
+            <span style="flex:1">คะแนน</span>
+            <span style="flex:1"></span>
+          </div>
+          <div class="mk-table-row">
+            <span style="flex:2;font-size:11px;font-weight:600">สมหญิง รักงาน</span>
+            <span style="flex:1;font-size:10px;color:var(--muted)">การเงิน</span>
+            <span style="flex:1"><span class="mk-chip app1">📋 รอ Approve MD</span></span>
+            <span style="flex:1;font-size:11px;font-weight:700;color:var(--navy)">85.50</span>
+            <span style="flex:1"><button class="mk-btn-sm mk-btn-view">👁 ดูผล</button></span>
+          </div>
+          <div class="mk-table-row">
+            <span style="flex:2;font-size:11px;font-weight:600">นารี สุขใจ (Supervisor)</span>
+            <span style="flex:1;font-size:10px;color:var(--muted)">การเงิน</span>
+            <span style="flex:1"><span class="mk-chip app1">📋 รอ Approve ขั้น 2</span></span>
+            <span style="flex:1;font-size:11px;font-weight:700;color:var(--navy)">91.00</span>
+            <span style="flex:1"><button class="mk-btn-sm mk-btn-view">👁 ดูผล</button></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Approve — สถานะเปลี่ยนเป็น ✅ เสร็จสิ้น</h4>
+          <p>กด <strong>"👁 ดูผล"</strong> ตรวจสอบ แล้วกด <strong>"✓ Approve"</strong> — สถานะจะเปลี่ยนเป็น เสร็จสิ้น ทันที</p>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-label">หลัง MD Approve — สถานะสุดท้าย</div>
+        <div class="mockup-frame" style="padding:12px 16px">
+          <div class="mk-banner">
+            <div class="mk-stage done-s">✓ รอการประเมิน</div>
+            <div class="mk-stage done-s">✓ รอกดรับทราบ</div>
+            <div class="mk-stage done-s">✓ รอ Approve</div>
+            <div class="mk-stage active-s3">✓ เสร็จสิ้น</div>
+          </div>
+          <div style="text-align:center;padding:12px 0">
+            <span style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:8px 16px;color:#2e7d32;font-size:12px;font-weight:600">✅ กระบวนการประเมินเสร็จสมบูรณ์</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="cta"><p>พร้อมเข้าใช้งานแล้ว</p><a href="[LINK]" target="_blank">เข้าสู่ระบบ →</a></div>
+</div>
+
+</div><!-- end .content -->
+
+<script>
+function showSection(role, btn) {
+  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('show')});
+  document.querySelectorAll('.role-btn').forEach(function(b){b.classList.remove('active')});
+  var sec = document.getElementById('sec-'+role);
+  if (sec) { sec.classList.add('show'); setTimeout(function(){ sec.scrollIntoView({behavior:'smooth',block:'start'}); },50); }
+  if (btn) btn.classList.add('active');
+}
+function goBack() {
+  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('show')});
+  document.querySelectorAll('.role-btn').forEach(function(b){b.classList.remove('active')});
+  document.querySelector('.role-wrap').scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+</body>
+</html>
