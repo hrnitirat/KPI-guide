@@ -214,18 +214,19 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
       <button class="role-btn" onclick="showSection('sup',this)">
         <span class="rb-icon">✏️</span>
         <div class="rb-title">หัวหน้าแผนก</div>
-        <div class="rb-sub">กรอกคะแนน + ส่งผล</div>
+        <div class="rb-sub">ประเมินผลผู้ใต้บังคับบัญชา</div>
       </button>
       <button class="role-btn" onclick="showSection('mgr',this)">
         <span class="rb-icon">✅</span>
         <div class="rb-title">ผู้จัดการฝ่าย / ผู้ช่วยกรรมการฯ</div>
-        <div class="rb-sub">Approve คะแนน</div>
+        <div class="rb-sub">ประเมินและ Approve คะแนน</div>
       </button>
       <button class="role-btn" onclick="showSection('md',this)">
         <span class="rb-icon">🏢</span>
         <div class="rb-title">กรรมการผู้จัดการ</div>
         <div class="rb-sub">Approve ขั้นสุดท้าย</div>
       </button>
+      <div class="rb-sub">NOTE : พนักงานทุกท่านต้องกด <strong>"✅ รับทราบผลการประเมิน"</strong> ของตนเอง ที่หน้า <strong>"📊 KPI ของฉัน"<strong></div>
     </div>
   </div>
 </div>
@@ -444,11 +445,11 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
         <div class="step-num">1</div>
         <div class="step-body">
           <h4>หน้า Evaluate — ดู Stepper</h4>
-          <p>Stepper แสดง 6 ขั้น Badge สีแสดงจำนวนคนในแต่ละขั้น — กดที่ขั้น <strong>"รอประเมิน"</strong> เพื่อเริ่ม</p>
+          <p>Stepper แสดง 6 ขั้น Badge สีแดงจำนวนคนในแต่ละขั้น — กดที่ขั้น <strong>"รอประเมิน"</strong> เพื่อเริ่ม</p>
         </div>
       </div>
       <div class="mockup-wrap">
-        <div class="mockup-label">ตัวอย่าง Stepper — หัวหน้าแผนกไม่มีสิทธิ์ Approve จึงไม่มีวงกลมแดง</div>
+        <div class="mockup-label">ตัวอย่าง Stepper — การกด Approve เป็นสิทธิ์ของผู้จัดการฝ่ายขึ้นไปเท่านั้น</div>
         <div class="mockup-frame">
           <div class="mk-nav">
             <div class="mk-nav-brand"><div class="mk-nav-logo">📊</div>ระบบประเมิน KPI</div>
@@ -500,7 +501,7 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
         <div class="step-num">2</div>
         <div class="step-body">
           <h4>เลือกพนักงานจากตาราง</h4>
-          <p>กด <strong>"📝 ประเมิน"</strong> หน้าชื่อพนักงานที่ต้องการกรอกคะแนน — ปุ่มจะเปลี่ยนเป็น <strong>"👁 ดูผล"</strong> เมื่อพนักงานกดรับทราบแล้ว</p>
+          <p>กด <strong>"📝 ประเมิน"</strong> ที่รายชื่อพนักงานที่ต้องการประเมิน — เมื่อหัวหน้าประเมินและพนักงานกดรับทราบแล้ว ปุ่มจะเปลี่ยนเป็น <strong>"👁 ดูผล"</strong> </p>
         </div>
       </div>
       <div class="mockup-wrap">
@@ -544,7 +545,7 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
         <div class="step-num">3</div>
         <div class="step-body">
           <h4>กรอกคะแนนแต่ละข้อ</h4>
-          <p>พิมพ์คะแนนในช่องแต่ละข้อ คะแนนรวมจะคำนวณอัตโนมัติ ข้อที่ติด badge <strong>HR</strong> = HR เป็นผู้กรอกให้</p>
+          <p>พิมพ์คะแนนแต่ละข้อลงในช่อง คะแนนรวมจะคำนวณอัตโนมัติ ข้อที่ติด badge <strong>HR</strong> = HR เป็นผู้กรอกให้ - เสร็จแล้ว กด 💾 บันทึกคะแนน </p>
           <div class="tip">💡 กรณีไม่มีคะแนน HR แสดง สามารถกรอกตัวเลขได้เลย</div>
         </div>
       </div>
@@ -593,12 +594,12 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px">
     <div style="background:#e8f0fe;border:1.5px solid #c7d7fd;border-radius:12px;padding:14px 16px">
       <div style="font-size:18px;margin-bottom:6px">✏️</div>
-      <div style="font-size:13px;font-weight:700;color:#1e3a8a;margin-bottom:3px">หน้าที่ที่ 1</div>
+      <div style="font-size:13px;font-weight:700;color:#1e3a8a;margin-bottom:3px">รายการที่ต้องดำเนินการ: 1</div>
       <div style="font-size:12px;color:#3b4ea6">ประเมินผู้ใต้บังคับบัญชาโดยตรงของท่าน</div>
     </div>
     <div style="background:#ede9fe;border:1.5px solid #c4b5fd;border-radius:12px;padding:14px 16px">
       <div style="font-size:18px;margin-bottom:6px">🖊️</div>
-      <div style="font-size:13px;font-weight:700;color:#4c1d95;margin-bottom:3px">หน้าที่ที่ 2</div>
+      <div style="font-size:13px;font-weight:700;color:#4c1d95;margin-bottom:3px">รายการที่ต้องดำเนินการ: 2</div>
       <div style="font-size:12px;color:#5b21b6">Approve คะแนนที่หัวหน้าแผนกประเมิน</div>
     </div>
   </div>
@@ -615,7 +616,7 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
         <div class="step-num" style="background:var(--blue)">1</div>
         <div class="step-body">
           <h4>หน้า Evaluate — ดู Stepper</h4>
-          <p>Stepper แสดง 6 ขั้น — วงกลมสีแดงจะปรากฏที่ขั้น <strong>"รอ Approve จากผู้จัดการฝ่าย"</strong> ซึ่งคือขั้นที่ท่านมีสิทธิ์ Approve</p>
+          <p>Stepper แสดง 6 ขั้น — วงกลมสีแดงจะปรากฏที่ขั้น <strong>"รอ Approve จากผู้จัดการฝ่าย"</strong> คือขั้นตอนที่ท่านต้องดำเนินการ กด <strong>"Approve"<strong></p>
         </div>
       </div>
       <div class="mockup-wrap">
@@ -685,10 +686,10 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
 
     <div class="step-card">
       <div class="step-top">
-        <div class="step-num" style="background:var(--blue)">2</div>
+        <div class="step-num" style="background:var(--blue)">3</div>
         <div class="step-body">
           <h4>กรอกคะแนนและบันทึก</h4>
-          <p>กด <strong>"📝 ประเมิน"</strong> หน้าชื่อพนักงาน กรอกคะแนนแต่ละข้อ แล้วกด <strong>"💾 บันทึกคะแนน"</strong> — เหมือนกับขั้นตอนของหัวหน้าแผนกทุกประการ</p>
+          <p>กด <strong>"📝 ประเมิน"</strong> ที่รายชื่อพนักงาน กรอกคะแนนแต่ละข้อ แล้วกด <strong>"💾 บันทึกคะแนน"</strong> — เหมือนกับขั้นตอนของหัวหน้าแผนกทุกประการ</p>
           <div class="tip">💡 ข้อที่มี badge HR = HR กรอกให้ ไม่ต้องกรอกเอง</div>
         </div>
       </div>
@@ -744,7 +745,8 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
         <div class="step-num" style="background:#5b21b6">2</div>
         <div class="step-body">
           <h4>ตรวจสอบและกด Approve</h4>
-          <p>กด <strong>"👁 ดูผล"</strong> ดูรายละเอียดคะแนน แล้วกดปุ่ม <strong>"✓ Approve"</strong> ที่ด้านล่าง การกด Approve เปรียบเสมือนการเซ็นรับรองเอกสาร</p>
+          <p>กด <strong>"👁 ดูผล"</strong> ตรวจสอบรายละเอียดคะแนน แล้วกดปุ่ม <strong>"✓ Approve"</strong> ที่ด้านล่าง</p>
+          <div class="tip">💡 การกด Approve เปรียบเสมือนการเซ็นรับรองเอกสาร ✍️</div>
         </div>
       </div>
       <div class="mockup-wrap">
@@ -776,12 +778,12 @@ body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px">
     <div style="background:#e8f0fe;border:1.5px solid #c7d7fd;border-radius:12px;padding:14px 16px">
       <div style="font-size:18px;margin-bottom:6px">✏️</div>
-      <div style="font-size:13px;font-weight:700;color:#1e3a8a;margin-bottom:3px">หน้าที่ที่ 1</div>
+      <div style="font-size:13px;font-weight:700;color:#1e3a8a;margin-bottom:3px">รายการที่ต้องดำเนินการ: 1</div>
       <div style="font-size:12px;color:#3b4ea6">ประเมินผู้ใต้บังคับบัญชาโดยตรงของท่าน</div>
     </div>
     <div style="background:#e8f5e9;border:1.5px solid #a5d6a7;border-radius:12px;padding:14px 16px">
       <div style="font-size:18px;margin-bottom:6px">🖊️</div>
-      <div style="font-size:13px;font-weight:700;color:#1b5e20;margin-bottom:3px">หน้าที่ที่ 2</div>
+      <div style="font-size:13px;font-weight:700;color:#1b5e20;margin-bottom:3px">รายการที่ต้องดำเนินการ: 2</div>
       <div style="font-size:12px;color:#2e7d32">Approve ขั้นสุดท้าย — ทุก role มาจบที่ท่าน</div>
     </div>
   </div>
